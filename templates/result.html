@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarization</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Raleway;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: rgb(237, 232, 232);
+            color: black;
+            text-align: center;
+            padding: 10px;
+            box-shadow: 3px 5px 3px rgb(215, 212, 212);
+        }
+       
+        nav {
+            width: 300px;
+            height: 100vh;
+            background-color: black;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-x: visible;
+            padding-top: 20px;
+        }
+
+        nav ul li img {
+            padding-top: 100px;
+            padding-left: 100px;
+            width: 300px;
+            height: 300px;
+        }
+
+        nav a {
+            display: flex;
+            padding: 15px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: text-decoration 0.3s;
+            color: white;
+            margin-left: 30px;
+            font-size: x-large;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            margin-left: 500px;
+            padding: 16px;
+        }
+        .home-section,
+        .about-section {
+            display: none;
+        }
+
+        .active-section {
+            display: block;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 200px;
+        }
+
+        input[type="submit"] {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .content {
+           align-items: center;
+           justify-content: center;
+           margin-left: 350px;
+           margin-top: 120px;
+        }
+    </style>
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+         .page-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center horizontally */
+            justify-content: center; /* Center vertically */
+            
+            margin-left: 400px;
+            margin-top: 40px;
+        }
+
+        .container {
+            display: flex;
+            background-color: white;
+            
+            border-radius: 15px;
+            width: fit-content;
+            align-items: center;
+        }
+
+        .box {
+            width: 400px;
+            
+            box-shadow: 2px 2px 3px rgba(172, 171, 171, 0.348);
+            padding: 10px;
+            height: 200px;
+            box-sizing: border-box;
+            background-color: #fff;
+            margin: 15px;
+            border-radius: 15px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        p {
+            color: #666;
+            text-align: center;
+        }
+
+        .container2 {
+            display: flex;
+            justify-content: center;
+            border-radius: 15px;
+            
+            align-items: center;
+            width: 58%;
+            
+        }
+
+        .container2 .box {
+            width: 90%;
+            box-shadow: 2px 2px 3px rgba(172, 171, 171, 0.348);
+            padding: 10px;
+            height: 200px;
+            box-sizing: border-box;
+            margin: 15px;
+            background-color: #fff;
+            border-radius: 15px;
+            
+        }
+
+        .container2 h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        .container2 p {
+            color: #666;
+            text-align: center;
+        }
+
+        .icon-heading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-heading img {
+            margin-right: 10px;
+            height: 30px;
+            width: 30px;
+        }
+
+        .icon-heading2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-heading2 img {
+            margin-right: 10px;
+            height: 50px;
+            width: 50px;
+        }
+        #text a{
+            display: flex;
+            text-decoration: none;
+            text-align: left;
+            color: white;
+            margin-left: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 style="padding-left: 250px;">ShopperBuzzSummaries</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><img src="/static/logo.png"></li><br><br>
+            <li><a href="{{url_for('index')}}" >HOME</a></li><br><br>
+            <li><a href="{{url_for('index')}}" >ABOUT</a></li>
+        </ul>
+    </nav>
+    <div class="page-container">
+        <div class="container">
+            <div class="box">
+                <div class="icon-heading">
+                    <img src="/static/amazonlogo.png" >
+                    <h2>AMAZON</h2>
+                </div>
+                <p><b>{{result[0][0]}}</b></p>
+                <p><b>Positive Score: </b>{{result[0][1]}}</p>
+                <p><b>Negative Score: </b>{{result[0][2]}}</p>
+            </div>            
+            <div class="box">
+                <div class="icon-heading2">
+                    <img src="/static/flipkartlogo.png" >
+                    <h2>FLIPKART</h2>
+                </div>
+                <p><b>{{result[1][0]}}</b></p>
+                <p><b>Positive Score: </b>{{result[1][1]}}</p>
+                <p><b>Negative Score: </b>{{result[1][2]}}</p>
+            </div>  
+        </div>
+        <div class="container2" style="margin-top: 20px;">
+            <div class="box">
+                <h2>SUGGESTION</h2>
+                <p>{{result[2]}}</p>
+                <p><a href =" {{ result[3] }} ">Click Here To Buy<a></p>
+            </div>
+        </div>
+    </div>
+
+           
+            
+
+</body>
+</html>
